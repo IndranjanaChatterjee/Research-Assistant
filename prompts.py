@@ -2,7 +2,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 import os
 import streamlit as st
-from langchain_core.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate,load_prompt
 load_dotenv()
 
 # Check if API key is set
@@ -30,27 +30,16 @@ paper_input=st.selectbox("Select Research Paer Name",["Select...","Attention is 
 style_input=st.selectbox("Select Style",["Select...","Beginner-friendly","Code Oriented","Mathematical","Technical"]);
 input_length = st.selectbox("Select Style",["Select","Short(1-2 paragraphs)","Medium (3-4 paragraphs)", "Long (Detailed)"])
 
-# template
-template=PromptTemplate(
-    input_variables=["paper_input", "style_input", "length_input"],
-    template="""Please summarize the research paper titled '{paper_input}' with the following specifications:
-    Explanation Style: {style_input}
-    Explanation Length: {length_input}
-    1. Mathematical Details:
-     - Include relevant mathematical equations if present in the paper.
-     - Explain the mathematical concepts using simple, intuitive code snippets where applicable.
-    2. Analogies:
-     - Use relatable analogies to simplify complex ideas.
-    Ensure the summary is clear, concise, accurate, and aligned with the provided style."""
-)
+template=load_prompt('template.json');
 
-# fill the placeholders
-prompt = template.invoke({
+
+
+if st.button('Summarize'):
+    chain = template | model;   #creating chains with template first and model second such that the output of the first is the input of the second which is model
+    result=chain.invoke({
     "paper_input":paper_input,
     "style_input":style_input,
     "length_input":input_length,
-})
-
-if st.button('Summarize'):
-    result = model.invoke(prompt);
+    })
+    
     st.write(result.content)
