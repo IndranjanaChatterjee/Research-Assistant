@@ -25,7 +25,7 @@ model = ChatGoogleGenerativeAI(
 
 st.header('Research Tool')
 
-user_input=st.text_input('Enter the name of your research paper')
+
 paper_input=st.selectbox("Select Research Paer Name",["Select...","Attention is ALL you need","BERT:Pretraining deep Bidirectional Transformers"])
 style_input=st.selectbox("Select Style",["Select...","Beginner-friendly","Code Oriented","Mathematical","Technical"]);
 input_length = st.selectbox("Select Style",["Select","Short(1-2 paragraphs)","Medium (3-4 paragraphs)", "Long (Detailed)"])
