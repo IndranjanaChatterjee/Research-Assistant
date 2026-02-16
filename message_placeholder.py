@@ -3,7 +3,7 @@ from langchain_core.messages import SystemMessage,HumanMessage
 # chattemplate
 chat_template=ChatPromptTemplate([
     ('system','you are a helpful customer support Agent?'),
-    MessagesPlaceholder(variable_name='chat_history'),  # to retrieve and store the chat history
+    MessagesPlaceholder(variable_name='chat_history'),  # to retrieve and store the chat history before the human query so that context is maintained
     ('human','{query}')
 ])
 
