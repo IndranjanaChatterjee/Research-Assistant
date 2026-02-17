@@ -1,0 +1,10 @@
+{
+    "title":"Student",
+    "description":"Creating json for data formattong while using llm , here fr",
+    "type":"object",
+    "properties":{
+        "name":"string",
+        "age":"integer"
+    },
+    "required":["name"]
+}
