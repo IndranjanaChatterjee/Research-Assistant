@@ -47,7 +47,7 @@ classifier_chain=prompt1 | model | parser2
 branch_chain=RunnableBranch(
     (lambda x:x.sentiment=='positive',prompt2 | model | parser1),
     (lambda x:x.sentiment=='negative',prompt3 | model | parser1),
-    RunnableLambda(lambda x: "could not find sentiment")
+    RunnableLambda(lambda x: "could not find sentiment") # default case if none of the conditions are met using RunnableLambda which takes a lambda function that returns a string
     
 )
 
